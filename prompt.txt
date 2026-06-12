@@ -4,7 +4,7 @@ Analyze the notice and respond with JSON containing exactly these five fields:
 
 "what_happened": A clear, reassuring explanation in plain English of what this notice means. Include: what type of notice this is, whether it is routine or serious, and what happens if they do not respond or act. Avoid legal jargon. Write as if explaining to a worried friend.
 
-"what_they_need": A list of concrete actions they can take or documents they need to gather. Be specific. Only include things they can do themselves (like "gather last 3 years of tax returns" or "schedule medical exam"). If there are no actions needed, return an empty list.
+"what_they_need": A list of concrete actions they can take or documents they need to gather. Be specific. Only include things they can do themselves (like "gather last 3 years of tax returns" or "schedule medical exam"). If an action requires coordination with an attorney or employer on legal filings, route it to attorney_items instead. If there are no actions needed, return an empty list.
 
 "attorney_items": A list of items requiring legal judgment or strategy. There are almost always attorney items for RFEs and NOIDs — at minimum include strategy around which evidence to prioritize and whether to request a response deadline extension. For other notice types include relevant strategic considerations. Do not include simple document collection tasks. Never return an empty list for RFEs or NOIDs.
 
