@@ -146,8 +146,10 @@ async def explain_notice(
             try:
                 parsed_response = json.loads(content)
                 return ExplanationResponse(**parsed_response)
-            except json.JSONDecodeError:
-                raise HTTPException(status_code=500, detail="Invalid response format from LLM")
+            except json.JSONDecodeError as e:
+                raise HTTPException(status_code=500, detail=f"Invalid JSON from LLM: {str(e)[:200]}... | Raw response: {content[:500]}...")
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Error parsing LLM response: {str(e)} | Raw response: {content[:500]}...")
     
     except HTTPException:
         raise
