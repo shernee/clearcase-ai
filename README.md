@@ -1,4 +1,4 @@
-# Immigration Notice Explainer
+# Notice Explainer
 
 A web application that helps people understand their immigration notices by providing clear, anxiety-aware explanations in plain English. Users can paste notice text or upload photos/PDFs of their immigration documents to receive structured explanations.
 
