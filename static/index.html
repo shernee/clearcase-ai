@@ -8,10 +8,15 @@
 <body>
     <h1>Immigration Notice Explainer</h1>
     
-    <form id="explainForm">
+    <form id="explainForm" enctype="multipart/form-data">
         <div>
             <label for="noticeText">Paste your immigration notice:</label>
             <textarea id="noticeText" rows="10" cols="80" placeholder="Paste the text of your immigration notice here..."></textarea>
+        </div>
+        
+        <div style="margin: 15px 0;">
+            <p style="margin: 5px 0; font-style: italic;">or upload a photo or PDF of your notice</p>
+            <input type="file" id="noticeFile" accept=".jpg,.jpeg,.png,.pdf" />
         </div>
         
         <button type="submit">Explain Notice</button>
@@ -27,24 +32,48 @@
             e.preventDefault();
             
             const noticeText = document.getElementById('noticeText').value;
-            if (!noticeText.trim()) {
-                alert('Please enter some text');
+            const noticeFile = document.getElementById('noticeFile').files[0];
+            
+            if (!noticeText.trim() && !noticeFile) {
+                alert('Please enter text or upload a file');
                 return;
             }
             
             try {
+                const formData = new FormData();
+                if (noticeFile) {
+                    formData.append('file', noticeFile);
+                }
+                if (noticeText.trim()) {
+                    formData.append('notice_text', noticeText);
+                }
+                
                 const response = await fetch('/explain', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ notice_text: noticeText })
+                    body: formData
                 });
                 
                 const data = await response.json();
                 
                 if (response.ok) {
-                    document.getElementById('explanation').innerHTML = data.explanation;
+                    let html = `
+                        <h3>What This Means:</h3>
+                        <p>${data.what_happened}</p>
+                        
+                        <h3>What You Need to Do:</h3>
+                        ${data.what_they_need.length > 0 ? 
+                            '<ul>' + data.what_they_need.map(item => `<li>${item}</li>`).join('') + '</ul>' : 
+                            '<p>No action required from you at this time.</p>'}
+                        
+                        <h3>Items for Your Attorney:</h3>
+                        ${data.attorney_items.length > 0 ? 
+                            '<ul>' + data.attorney_items.map(item => `<li>${item}</li>`).join('') + '</ul>' : 
+                            '<p>No legal strategy items identified.</p>'}
+                        
+                        <h3>Notice Type:</h3>
+                        <p><strong>${data.notice_type.toUpperCase()}</strong></p>
+                    `;
+                    document.getElementById('explanation').innerHTML = html;
                     document.getElementById('result').style.display = 'block';
                 } else {
                     alert('Error: ' + (data.detail || 'Unknown error'));
