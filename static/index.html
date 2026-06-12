@@ -308,6 +308,11 @@
                 </div>
 
                 <div class="results-section">
+                    <h3>Important Deadline</h3>
+                    <div id="deadline"></div>
+                </div>
+
+                <div class="results-section">
                     <h3>Notice Type</h3>
                     <div id="noticeType"></div>
                 </div>
@@ -514,7 +519,7 @@ Questions? Call the USCIS Contact Center at 1-800-375-5283.`
                 
                 if (response.ok) {
                     // Clear previous results
-                    ['whatHappened', 'whatTheyNeed', 'attorneyItems', 'noticeType'].forEach(id => {
+                    ['whatHappened', 'whatTheyNeed', 'attorneyItems', 'deadline', 'noticeType'].forEach(id => {
                         document.getElementById(id).innerHTML = '';
                     });
                     
@@ -523,6 +528,15 @@ Questions? Call the USCIS Contact Center at 1-800-375-5283.`
                     
                     renderList(data.what_they_need, 'whatTheyNeed');
                     renderList(data.attorney_items, 'attorneyItems');
+                    
+                    // Handle deadline
+                    if (data.deadline) {
+                        document.getElementById('deadline').innerHTML = 
+                            `<p style="color: #DC2626; font-weight: 500;">⚠️ Response due by: ${data.deadline}</p>`;
+                    } else {
+                        document.getElementById('deadline').innerHTML = 
+                            '<div class="empty-state">No deadline specified</div>';
+                    }
                     
                     document.getElementById('noticeType').innerHTML = 
                         `<span class="notice-type">${data.notice_type}</span>`;

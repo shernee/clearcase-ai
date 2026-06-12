@@ -56,7 +56,27 @@ A web application that helps people understand their immigration notices by prov
 5. **Open browser**
    Navigate to `http://localhost:8000`
 
-### Using Docker
+### Using Docker Compose (Recommended)
+
+1. **Add your API key to .env file**
+   ```bash
+   echo "OPENROUTER_API_KEY=your-api-key-here" > .env
+   ```
+
+2. **Start the application**
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Open browser**
+   Navigate to `http://localhost:8000`
+
+4. **Stop the application**
+   ```bash
+   docker-compose down
+   ```
+
+### Using Docker (Alternative)
 
 1. **Build the image**
    ```bash
@@ -65,7 +85,7 @@ A web application that helps people understand their immigration notices by prov
 
 2. **Run the container**
    ```bash
-   docker run -p 8000:8000 -e OPENROUTER_API_KEY="your-api-key-here" immigration-explainer
+   docker run -p 8000:8000 --env-file .env immigration-explainer
    ```
 
 3. **Open browser**

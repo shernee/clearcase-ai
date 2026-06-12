@@ -28,6 +28,7 @@ class ExplanationResponse(BaseModel):
     what_happened: str
     what_they_need: List[str]
     attorney_items: List[str]
+    deadline: Optional[str]
     notice_type: str
 
 class OpenRouterMessage(BaseModel):
@@ -95,23 +96,10 @@ async def explain_notice(
         else:
             raise HTTPException(status_code=400, detail="Must provide either text or file")
         
-        # Build prompt
-        base_prompt = """You are helping someone understand their immigration notice. They may be anxious and unfamiliar with legal terminology. Analyze this immigration notice and respond with JSON containing exactly these four fields:
-
-"what_happened": A clear, reassuring explanation in plain English of what this notice means. Avoid legal jargon. Write as if speaking to a worried friend.
-
-"what_they_need": A list of concrete actions they can take or documents they need to gather. Be specific about deadlines. Only include things they can do themselves (like "gather tax returns" or "schedule medical exam"). If there are no actions needed, return empty list.
-
-"attorney_items": A list of items that require legal judgment or strategy. Include things like "determine eligibility for waiver" or "assess appeal options" or "evaluate case strength". Do not include simple document collection tasks. If none needed, return empty list.
-
-"notice_type": Classify the notice as one of: "RFE", "NOID", "interview_notice", "approval", "denial", "I-94", or "unknown"
-
-Rules:
-- Never say you cannot help - just route complex items to attorney_items
-- No legal advice - only factual explanations and document lists
-- Write for someone who is stressed and non-technical
-- Be encouraging but honest about deadlines and requirements
-- Return only valid JSON"""
+        # Load prompt from file
+        prompt_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'prompt.txt')
+        with open(prompt_path, 'r') as f:
+            base_prompt = f.read().strip()
         
         # Create message content based on input type
         if is_image:
