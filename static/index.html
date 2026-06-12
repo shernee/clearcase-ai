@@ -272,9 +272,9 @@
 
                 <div class="examples">
                     <h3>Try an example:</h3>
-                    <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('rfe')">Request for Evidence</button>
+                    <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('rfe')">H-1B RFE</button>
+                    <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('noid')">Intent to Deny</button>
                     <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('interview')">Interview Notice</button>
-                    <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('approval')">Approval Notice</button>
                 </div>
                 
                 <button type="submit" class="btn">Explain Notice</button>
@@ -323,47 +323,132 @@
 
     <script>
         const examples = {
-            rfe: `USCIS
-Request for Evidence
+            rfe: `DEPARTMENT OF HOMELAND SECURITY
+U.S. Citizenship and Immigration Services
 
-Receipt Number: MSC1234567890
-Date: January 15, 2024
+REQUEST FOR EVIDENCE
 
-You must submit the following evidence:
-- Tax returns for 2021, 2022, and 2023
-- Employment verification letter from current employer
-- Proof of relationship (marriage certificate)
+Receipt Number: MSC2491234567
+Date: February 14, 2024
+Re: I-129, Petition for Nonimmigrant Worker (H-1B)
+Petitioner: TechCorp Solutions Inc.
+Beneficiary: Sarah Chen
 
-You have 87 days from the date of this notice to respond.`,
+INITIAL EVIDENCE AND SUPPORTING DOCUMENTATION REQUIRED
+
+The petition cannot be approved for the following reason(s):
+
+SPECIALTY OCCUPATION: The evidence submitted does not establish that the position qualifies as a specialty occupation under 8 CFR 214.2(h)(4)(iii)(A). The job duties described appear to be general business functions that do not require a bachelor's degree in a specific field of study.
+
+YOU MUST SUBMIT:
+
+1. A detailed position description explaining the specific duties to be performed, percentage of time for each duty, and the complexity, uniqueness, and specialization of the duties.
+
+2. Documentation establishing that the position requires theoretical and practical application of a body of specialized knowledge and attainment of a bachelor's or higher degree in the specific specialty (or its equivalent) as a minimum for entry into the occupation in the United States.
+
+3. Evidence that the petitioner requires a degree for the position, such as:
+   - Job postings for similar positions requiring a degree
+   - Academic studies or industry reports
+   - Professional association standards
+   - Previous hiring patterns
+
+4. An updated Labor Condition Application (LCA) if the job duties differ significantly from those originally described.
+
+DEADLINE: You have 87 days from the date of this notice to respond. Failure to respond by May 12, 2024, will result in the denial of this petition.
+
+If you have questions about this notice, you may contact the National Customer Service Center at 1-800-375-5283.`,
             
-            interview: `USCIS
-Interview Notice
+            noid: `DEPARTMENT OF HOMELAND SECURITY
+U.S. Citizenship and Immigration Services
 
-Receipt Number: MSC1234567890
-Date: January 15, 2024
+NOTICE OF INTENT TO DENY
 
-You are scheduled for an interview on March 15, 2024 at 9:00 AM.
+Receipt Number: MSC2491234890
+Date: February 14, 2024
+Re: I-130, Petition for Alien Relative
+Petitioner: Michael Rodriguez (USC)
+Beneficiary: Maria Rodriguez
 
-Please bring:
-- Valid passport
-- Birth certificate
-- Marriage certificate (if applicable)
-- All requested documents from previous notices
+This is to inform you that U.S. Citizenship and Immigration Services (USCIS) intends to deny your petition for the following reason(s):
 
-Address: USCIS Field Office, 123 Federal Plaza, New York, NY 10278`,
+INSUFFICIENT EVIDENCE OF BONA FIDE MARRIAGE: The evidence submitted fails to establish that you and your spouse have a bona fide marital relationship. Specifically:
+
+1. FINANCIAL COMMINGLING: The bank statements and tax returns show minimal financial integration. Joint accounts show little activity, and most financial transactions remain separate.
+
+2. COHABITATION: Evidence of shared residence is insufficient. Lease agreements show only one party as the tenant, utility bills are in single names, and insurance policies do not list spouse as beneficiary.
+
+3. RELATIONSHIP DEVELOPMENT: The timeline between meeting and marriage (3 months) raises questions about the authenticity of the relationship. Limited photographic evidence of relationship development.
+
+FRAUD INTERVIEW CONDUCTED: Based on separate interviews conducted on January 15, 2024, significant discrepancies were found in basic information about each other, household arrangements, and relationship timeline.
+
+You may overcome this by submitting:
+- Joint tax returns for years married
+- Insurance policies listing spouse as beneficiary
+- Joint utility bills, lease agreements, or mortgage documents
+- Bank statements showing significant joint financial activity
+- Affidavits from friends/family with personal knowledge of relationship
+- Photos documenting relationship progression with dates
+- Evidence of shared travels, holidays, or significant life events
+
+This is not a final decision. You have 30 days from receipt of this notice to submit additional evidence or legal argument demonstrating eligibility.
+
+Failure to respond by March 16, 2024, will result in denial of this petition based on the evidence in the record.`,
             
-            approval: `USCIS
-Approval Notice
+            interview: `DEPARTMENT OF HOMELAND SECURITY
+U.S. Citizenship and Immigration Services
 
-Receipt Number: MSC1234567890
-Date: January 15, 2024
+INTERVIEW APPOINTMENT NOTICE
 
-Your Form I-485, Application to Adjust Status, has been approved.
+Receipt Number: MSC2491235678
+Date: February 14, 2024
+Case Type: I-485 Application to Adjust Status to Permanent Resident
+Applicant: David Kim
 
-Your new status is: Lawful Permanent Resident
-Effective Date: January 15, 2024
+YOU ARE SCHEDULED FOR AN INTERVIEW
 
-Your Green Card will be mailed to the address on file within 30 days.`
+Date: Thursday, March 21, 2024
+Time: 10:30 AM
+Location: USCIS Los Angeles Field Office
+              1055 Wilshire Blvd, Suite 1600
+              Los Angeles, CA 90017
+
+IMPORTANT: Failure to appear for this interview may result in the denial of your application.
+
+WHAT TO BRING TO YOUR INTERVIEW:
+
+REQUIRED DOCUMENTS:
+□ This appointment notice
+□ Valid passport and all travel documents
+□ Birth certificate with certified English translation
+□ Marriage certificate (if applicable) with certified English translation
+□ Divorce decree(s) from any prior marriages
+□ All Forms I-94 (Arrival/Departure Records)
+
+FINANCIAL DOCUMENTS:
+□ Most recent tax returns (3 years)
+□ Employment authorization document (if applicable)
+□ Current employment letter stating position, salary, and start date
+□ Pay stubs from last 3 months
+□ Bank statements from last 6 months
+
+MEDICAL EXAMINATION:
+□ Report of Medical Examination (Form I-693) in sealed envelope from civil surgeon
+□ Vaccination records
+
+ADDITIONAL DOCUMENTS FOR FAMILY-BASED CASES:
+□ Sponsor's most recent tax returns and Form I-864
+□ Sponsor's employment verification letter
+□ Evidence of ongoing relationship (photos, correspondence, joint accounts)
+
+PARKING: Limited parking available. Public transportation recommended.
+
+SECURITY: Photo ID required for entry. No cell phones, cameras, or recording devices permitted in federal building.
+
+WHAT TO EXPECT: The interview will cover your application, background, and eligibility for permanent residence. Bring an interpreter if needed (not a family member).
+
+If you cannot attend this interview, you must contact us immediately to reschedule. Rescheduling may significantly delay your case.
+
+Questions? Call the USCIS Contact Center at 1-800-375-5283.`
         };
 
         function loadExample(type) {
