@@ -3,10 +3,11 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies for PDF processing
+# Install system dependencies for PDF processing and health checks
 RUN apt-get update && apt-get install -y \
     libmupdf-dev \
     mupdf-tools \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements file
@@ -22,6 +23,9 @@ COPY static/ ./static/
 # Create a non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
+
+# Declare required environment variables
+ENV OPENROUTER_API_KEY=""
 
 # Expose port
 EXPOSE 8000
