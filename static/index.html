@@ -4,30 +4,400 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Immigration Notice Explainer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafb;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #1D9E75;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            color: #6B7280;
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .textarea:focus {
+            outline: none;
+            border-color: #1D9E75;
+        }
+
+        .file-upload {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #E5E7EB;
+            border-radius: 8px;
+            text-align: center;
+            background: #F9FAFB;
+        }
+
+        .file-upload p {
+            color: #6B7280;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .file-input {
+            margin: 0 auto;
+            display: block;
+        }
+
+        .btn {
+            background: #1D9E75;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background: #158F66;
+        }
+
+        .btn:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6B7280;
+        }
+
+        .btn-secondary:hover {
+            background: #4B5563;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .examples {
+            margin-bottom: 20px;
+        }
+
+        .examples h3 {
+            margin-bottom: 15px;
+            color: #374151;
+            font-size: 1.1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #E5E7EB;
+            border-top: 4px solid #1D9E75;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-section {
+            margin-bottom: 30px;
+        }
+
+        .results-section h3 {
+            color: #1D9E75;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 8px;
+        }
+
+        .results-section p {
+            margin-bottom: 10px;
+        }
+
+        .results-section ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .results-section li {
+            margin-bottom: 8px;
+        }
+
+        .notice-type {
+            display: inline-block;
+            background: #1D9E75;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .disclaimer {
+            background: #FEF3C7;
+            border: 1px solid #F59E0B;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .disclaimer strong {
+            color: #D97706;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #6B7280;
+            font-style: italic;
+            padding: 20px;
+            background: #F9FAFB;
+            border-radius: 8px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+
+            .btn-small {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Immigration Notice Explainer</h1>
-    
-    <form id="explainForm" enctype="multipart/form-data">
-        <div>
-            <label for="noticeText">Paste your immigration notice:</label>
-            <textarea id="noticeText" rows="10" cols="80" placeholder="Paste the text of your immigration notice here..."></textarea>
+    <div class="container">
+        <div class="header">
+            <h1>Immigration Notice Explainer</h1>
+            <p>Get clear, simple explanations of your immigration notices</p>
         </div>
-        
-        <div style="margin: 15px 0;">
-            <p style="margin: 5px 0; font-style: italic;">or upload a photo or PDF of your notice</p>
-            <input type="file" id="noticeFile" accept=".jpg,.jpeg,.png,.pdf" />
+
+        <!-- Input View -->
+        <div id="inputView" class="card">
+            <form id="explainForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="noticeText">Paste your immigration notice text:</label>
+                    <textarea id="noticeText" class="textarea" placeholder="Paste the text of your immigration notice here..."></textarea>
+                </div>
+                
+                <div class="file-upload">
+                    <p>or upload a photo or PDF of your notice</p>
+                    <input type="file" id="noticeFile" class="file-input" accept=".jpg,.jpeg,.png,.pdf" />
+                </div>
+
+                <div class="examples">
+                    <h3>Try an example:</h3>
+                    <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('rfe')">Request for Evidence</button>
+                    <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('interview')">Interview Notice</button>
+                    <button type="button" class="btn btn-small btn-secondary" onclick="loadExample('approval')">Approval Notice</button>
+                </div>
+                
+                <button type="submit" class="btn">Explain Notice</button>
+            </form>
         </div>
-        
-        <button type="submit">Explain Notice</button>
-    </form>
-    
-    <div id="result" style="display: none;">
-        <h2>Explanation:</h2>
-        <div id="explanation"></div>
+
+        <!-- Loading View -->
+        <div id="loadingView" class="card hidden">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Analyzing your immigration notice...</p>
+            </div>
+        </div>
+
+        <!-- Results View -->
+        <div id="resultsView" class="hidden">
+            <div class="card">
+                <div class="results-section">
+                    <h3>What This Means</h3>
+                    <div id="whatHappened"></div>
+                </div>
+
+                <div class="results-section">
+                    <h3>What You Need to Do</h3>
+                    <div id="whatTheyNeed"></div>
+                </div>
+
+                <div class="results-section">
+                    <h3>Items for Your Attorney</h3>
+                    <div id="attorneyItems"></div>
+                </div>
+
+                <div class="results-section">
+                    <h3>Notice Type</h3>
+                    <div id="noticeType"></div>
+                </div>
+
+                <button onclick="resetForm()" class="btn">Analyze Another Notice</button>
+
+                <div class="disclaimer">
+                    <strong>Important:</strong> This explanation is for informational purposes only and does not constitute legal advice. For specific legal guidance about your immigration case, please consult with a qualified immigration attorney.
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
+        const examples = {
+            rfe: `USCIS
+Request for Evidence
+
+Receipt Number: MSC1234567890
+Date: January 15, 2024
+
+You must submit the following evidence:
+- Tax returns for 2021, 2022, and 2023
+- Employment verification letter from current employer
+- Proof of relationship (marriage certificate)
+
+You have 87 days from the date of this notice to respond.`,
+            
+            interview: `USCIS
+Interview Notice
+
+Receipt Number: MSC1234567890
+Date: January 15, 2024
+
+You are scheduled for an interview on March 15, 2024 at 9:00 AM.
+
+Please bring:
+- Valid passport
+- Birth certificate
+- Marriage certificate (if applicable)
+- All requested documents from previous notices
+
+Address: USCIS Field Office, 123 Federal Plaza, New York, NY 10278`,
+            
+            approval: `USCIS
+Approval Notice
+
+Receipt Number: MSC1234567890
+Date: January 15, 2024
+
+Your Form I-485, Application to Adjust Status, has been approved.
+
+Your new status is: Lawful Permanent Resident
+Effective Date: January 15, 2024
+
+Your Green Card will be mailed to the address on file within 30 days.`
+        };
+
+        function loadExample(type) {
+            document.getElementById('noticeText').value = examples[type];
+        }
+
+        function showView(viewName) {
+            ['inputView', 'loadingView', 'resultsView'].forEach(view => {
+                document.getElementById(view).classList.add('hidden');
+            });
+            document.getElementById(viewName).classList.remove('hidden');
+        }
+
+        function resetForm() {
+            document.getElementById('explainForm').reset();
+            showView('inputView');
+        }
+
+        function renderList(items, containerId) {
+            const container = document.getElementById(containerId);
+            if (!items || items.length === 0) {
+                container.innerHTML = '<div class="empty-state">No items identified</div>';
+                return;
+            }
+            
+            const ul = document.createElement('ul');
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                ul.appendChild(li);
+            });
+            container.appendChild(ul);
+        }
+
         document.getElementById('explainForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -38,6 +408,8 @@
                 alert('Please enter text or upload a file');
                 return;
             }
+            
+            showView('loadingView');
             
             try {
                 const formData = new FormData();
@@ -56,30 +428,28 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    let html = `
-                        <h3>What This Means:</h3>
-                        <p>${data.what_happened}</p>
-                        
-                        <h3>What You Need to Do:</h3>
-                        ${data.what_they_need.length > 0 ? 
-                            '<ul>' + data.what_they_need.map(item => `<li>${item}</li>`).join('') + '</ul>' : 
-                            '<p>No action required from you at this time.</p>'}
-                        
-                        <h3>Items for Your Attorney:</h3>
-                        ${data.attorney_items.length > 0 ? 
-                            '<ul>' + data.attorney_items.map(item => `<li>${item}</li>`).join('') + '</ul>' : 
-                            '<p>No legal strategy items identified.</p>'}
-                        
-                        <h3>Notice Type:</h3>
-                        <p><strong>${data.notice_type.toUpperCase()}</strong></p>
-                    `;
-                    document.getElementById('explanation').innerHTML = html;
-                    document.getElementById('result').style.display = 'block';
+                    // Clear previous results
+                    ['whatHappened', 'whatTheyNeed', 'attorneyItems', 'noticeType'].forEach(id => {
+                        document.getElementById(id).innerHTML = '';
+                    });
+                    
+                    // Populate results
+                    document.getElementById('whatHappened').innerHTML = `<p>${data.what_happened}</p>`;
+                    
+                    renderList(data.what_they_need, 'whatTheyNeed');
+                    renderList(data.attorney_items, 'attorneyItems');
+                    
+                    document.getElementById('noticeType').innerHTML = 
+                        `<span class="notice-type">${data.notice_type}</span>`;
+                    
+                    showView('resultsView');
                 } else {
                     alert('Error: ' + (data.detail || 'Unknown error'));
+                    showView('inputView');
                 }
             } catch (error) {
                 alert('Error connecting to server: ' + error.message);
+                showView('inputView');
             }
         });
     </script>
